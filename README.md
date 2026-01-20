@@ -63,6 +63,24 @@ For questions, bug reporting or help creating events, please open an issue or em
 3. Open your browser to `http://localhost:8000`
 4. Edit `events.json` to add your own events and refresh the page
 
+## Adding a New Community Group
+
+To add a new tech community group to the calendar:
+
+1. **Add events to `events.json`** - Include all event details following the format examples below
+2. **Update `about.html`** - Add your group to the "Community Groups" section with:
+   - Group name (with website link if available)
+   - Brief description of the group
+   - Meeting schedule information
+
+Example addition to `about.html`:
+```html
+<li>
+  <strong><a href="https://example.com">Your Group Name</a></strong> -
+  Brief description of your group. Meets [frequency] to [purpose].
+</li>
+```
+
 ## Event Configuration
 
 Events are defined in `events.json`. Here are examples of different event types:
@@ -84,6 +102,7 @@ Events are defined in `events.json`. Here are examples of different event types:
     "endDate": null
   },
   "location": "TBD",
+  "website": "https://example.com",
   "color": "#3498db"
 }
 ```
@@ -105,6 +124,7 @@ Events are defined in `events.json`. Here are examples of different event types:
     "endDate": null
   },
   "location": "Local Bar",
+  "website": "https://example.com",
   "color": "#e74c3c"
 }
 ```
@@ -126,6 +146,7 @@ Events are defined in `events.json`. Here are examples of different event types:
     "endDate": null
   },
   "location": "Community Center",
+  "website": "https://example.com",
   "color": "#2ecc71"
 }
 ```
@@ -143,9 +164,12 @@ Events are defined in `events.json`. Here are examples of different event types:
   "startTime": "09:00",
   "endTime": "17:00",
   "location": "Convention Center",
+  "website": "https://example.com",
   "color": "#9b59b6"
 }
 ```
+
+**Note:** The `website` field is optional. If omitted, no website link will be displayed.
 
 ### Event Overrides
 

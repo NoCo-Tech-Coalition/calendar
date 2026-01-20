@@ -1,7 +1,6 @@
 # NoCo Tech Calendar
 
-A custom, lightweight calendar application for the Northern Colorado Tech Coalition. This calendar displays recurring and one-time events with support for flexible scheduling patterns, overrides, and cancellations.
-
+As the Northern Colorado Tech community continues to grow, we've found a need for a unified calendar. Most people in the tech industry wear many hats, so a single group may not cover all the interests of an individual. "We" (including you, the reader) serve to provide a single point of reference for all of the tech groups in Colorado north of the Denver metro (we'll call this latitudes north of boulder county for now). 
 ## Contributing
 
 To contribute events or improvements:

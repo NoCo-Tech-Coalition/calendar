@@ -390,7 +390,7 @@ main {
   padding: 20px;
   background: var(--background);
   transition: background-color 0.15s ease;
-  cursor: pointer;
+  cursor: default;
 }
 
 .event-list-item:hover {

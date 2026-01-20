@@ -1,0 +1,22 @@
+{
+  "events": [
+    {
+      "id": "noco-hackers-monthly",
+      "title": "NoCo Hackers",
+      "description": "NoCo Hackers is a budding community of cybersecurity professionals, enthusiasts, and playful computing practitioners based in Northern Colorado. Our mission is to share knowledge, foster collaboration, and create a supportive environment for all skill levels to learn and grow in the ever-evolving world of cybersecurity.",
+      "type": "recurring",
+      "recurrence": {
+        "frequency": "monthly",
+        "ordinalDay": "third thursday",
+        "startTime": "18:00",
+        "endTime": "21:00",
+        "startDate": "2024-01-01",
+        "endDate": null
+      },
+      "location": "Purpose Brewing & Cellars, Fort Collins, CO",
+      "color": "#df7020"
+    }
+  ],
+  "overrides": [
+  ]
+}

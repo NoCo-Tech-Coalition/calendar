@@ -1,0 +1,311 @@
+/* Fira Code: https://github.com/tonsky/FiraCode */
+@import url('https://cdn.staticdelivr.com/gfonts/css2?family=Fira+Code:wght@300..700&display=swap');
+
+/* Light theme variables */
+:root {
+  --background: #fffbf7;
+  --foreground: #45372b;
+  --accent: #df7020;
+  --radius: 0;
+  --font-size: 1rem;
+  --line-height: 1.54em;
+}
+
+/* Dark theme variables - activated via data attribute */
+[data-theme="dark"] {
+  --background: #1a170f;
+  --foreground: #eceae5;
+  --accent: #32858b;
+}
+
+/* Respect system preference by default */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #1a170f;
+    --foreground: #eceae5;
+    --accent: #32858b;
+  }
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family:
+    "Fira Code",
+    "JetBrains Mono",
+    Monaco,
+    Consolas,
+    "Ubuntu Mono",
+    monospace;
+  font-size: var(--font-size);
+  font-weight: 400;
+  line-height: var(--line-height);
+  background-color: var(--background);
+  color: var(--foreground);
+  text-rendering: optimizeLegibility;
+  font-variant-ligatures: contextual;
+  -webkit-overflow-scrolling: touch;
+  -webkit-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header with theme toggle */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: calc(var(--font-size) * 1.45);
+  letter-spacing: 0;
+  margin: 0;
+}
+
+/* Theme toggle button */
+#theme-toggle {
+  position: relative;
+  font: inherit;
+  font-weight: bold;
+  background: transparent;
+  color: var(--accent);
+  padding: 5px 18px;
+  border: 4px solid var(--accent);
+  border-radius: var(--radius);
+  transition: background 0.15s linear;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+}
+
+#theme-toggle:hover {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+#theme-toggle:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+#theme-icon {
+  font-size: 1.2em;
+  display: inline-block;
+}
+
+/* Main content */
+main {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Calendar wrapper */
+.calendar-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Calendar controls */
+.calendar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-controls button {
+  position: relative;
+  font: inherit;
+  font-weight: bold;
+  background: transparent;
+  color: var(--accent);
+  padding: 5px 18px;
+  border: 4px solid var(--accent);
+  border-radius: var(--radius);
+  transition: background 0.15s linear;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  min-width: 50px;
+}
+
+.calendar-controls button:hover {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.calendar-controls button:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+#current-month {
+  font-size: calc(var(--font-size) * 1.35);
+  margin: 0;
+  text-align: center;
+  flex: 1;
+}
+
+/* Calendar grid */
+.calendar-grid {
+  border: 2px solid var(--foreground);
+  background-color: var(--background);
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  border-bottom: 2px solid var(--foreground);
+}
+
+.day-label {
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--foreground);
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.05em;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  min-height: 500px;
+}
+
+.calendar-day {
+  border: 1px solid color-mix(in srgb, var(--foreground) 25%, transparent);
+  padding: 8px;
+  min-height: 100px;
+  position: relative;
+  background-color: var(--background);
+  transition: background-color 0.15s ease;
+}
+
+.calendar-day:hover {
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+}
+
+.calendar-day.other-month {
+  opacity: 0.4;
+}
+
+.calendar-day.today {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.day-number {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.event {
+  font-size: 0.75em;
+  padding: 2px 4px;
+  margin: 2px 0;
+  border-left: 3px solid;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  line-height: 1.2;
+}
+
+.event:hover {
+  opacity: 0.8;
+}
+
+.event.cancelled {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* Event details modal */
+.event-details {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--background);
+  border: 4px solid var(--accent);
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  z-index: 1000;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.event-details.hidden {
+  display: none;
+}
+
+.event-details h3 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.event-details p {
+  margin: 10px 0;
+}
+
+#close-details {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 2em;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  line-height: 1;
+}
+
+#close-details:hover {
+  opacity: 0.7;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .calendar-container iframe {
+    height: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: calc(0.9rem * 1.45);
+  }
+
+  .calendar-container iframe {
+    height: 400px;
+  }
+}

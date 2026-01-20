@@ -1,0 +1,77 @@
+{
+  "events": [
+    {
+      "id": "weekly-meetup",
+      "title": "Weekly Tech Meetup",
+      "description": "Weekly gathering for NoCo tech enthusiasts",
+      "type": "recurring",
+      "recurrence": {
+        "frequency": "weekly",
+        "daysOfWeek": [3],
+        "startTime": "18:00",
+        "endTime": "20:00",
+        "startDate": "2024-01-01",
+        "endDate": null
+      },
+      "location": "Downtown Coworking Space",
+      "color": "#df7020"
+    },
+    {
+      "id": "monthly-workshop",
+      "title": "Monthly Workshop",
+      "description": "Hands-on technical workshop",
+      "type": "recurring",
+      "recurrence": {
+        "frequency": "monthly",
+        "dayOfMonth": 15,
+        "startTime": "14:00",
+        "endTime": "17:00",
+        "startDate": "2024-01-01",
+        "endDate": null
+      },
+      "location": "Tech Hub",
+      "color": "#32858b"
+    },
+    {
+      "id": "conference-2026",
+      "title": "NoCo Tech Conference 2026",
+      "description": "Annual technology conference",
+      "type": "static",
+      "startDate": "2026-03-20",
+      "endDate": "2026-03-22",
+      "startTime": "09:00",
+      "endTime": "18:00",
+      "location": "Convention Center",
+      "color": "#8b3285"
+    },
+    {
+      "id": "hackathon",
+      "title": "Weekend Hackathon",
+      "description": "24-hour coding challenge",
+      "type": "static",
+      "startDate": "2026-02-14",
+      "endDate": "2026-02-15",
+      "startTime": "10:00",
+      "endTime": "10:00",
+      "location": "Innovation Center",
+      "color": "#df7020"
+    }
+  ],
+  "overrides": [
+    {
+      "eventId": "weekly-meetup",
+      "date": "2026-02-18",
+      "cancelled": true,
+      "reason": "Holiday - Presidents' Day"
+    },
+    {
+      "eventId": "weekly-meetup",
+      "date": "2026-03-04",
+      "title": "Special Guest Speaker Night",
+      "description": "Weekly meetup with special guest from Tech Corp",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "location": "Large Auditorium"
+    }
+  ]
+}

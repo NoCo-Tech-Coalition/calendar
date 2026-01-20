@@ -307,6 +307,7 @@
     const description = document.getElementById('detail-description');
     const time = document.getElementById('detail-time');
     const location = document.getElementById('detail-location');
+    const website = document.getElementById('detail-website');
 
     title.textContent = event.title;
     description.textContent = event.description || 'No description available';
@@ -324,6 +325,14 @@
     time.textContent = `Time: ${timeStr}`;
 
     location.textContent = `Location: ${event.location || 'TBD'}`;
+
+    // Show website if available
+    if (event.website) {
+      website.innerHTML = `Website: <a href="${event.website}" target="_blank" rel="noopener noreferrer">${event.website}</a>`;
+      website.style.display = 'block';
+    } else {
+      website.style.display = 'none';
+    }
 
     // Show cancellation notice if applicable
     if (override && override.cancelled) {
@@ -414,6 +423,11 @@
         timeStr = `${event.startTime} - ${event.endTime}`;
       }
 
+      // Build website link if available
+      const websiteHtml = event.website
+        ? `<span>🔗 <a href="${event.website}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Website</a></span>`
+        : '';
+
       eventItem.innerHTML = `
         <div class="event-date">${dateStr}</div>
         <div class="event-title">${event.title}</div>
@@ -421,6 +435,7 @@
         <div class="event-meta">
           <span>⏰ ${timeStr}</span>
           <span>📍 ${event.location || 'TBD'}</span>
+          ${websiteHtml}
         </div>
       `;
 

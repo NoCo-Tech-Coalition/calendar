@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a custom calendar application for the NoCo Tech Coalition that displays recurring and static events. The calendar supports flexible event definitions with overrides and cancellations.
+This is a custom calendar application for the NoCo Tech Collective that displays recurring and static events. The calendar supports flexible event definitions with overrides and cancellations.
 
 The project emphasizes fast load times, web accessibility (WCAG guidelines), and a responsive design with both light and dark modes. Theme preference respects the `prefers-color-scheme` CSS media query while also providing a manual theme toggle.
 

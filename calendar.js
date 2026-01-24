@@ -406,7 +406,7 @@
     const icsContent = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'PRODID:-//NoCo Tech Coalition//Calendar//EN',
+      'PRODID:-//NoCo Tech Collective//Calendar//EN',
       'CALSCALE:GREGORIAN',
       'METHOD:PUBLISH',
       'BEGIN:VTIMEZONE',
@@ -427,7 +427,7 @@
       'END:STANDARD',
       'END:VTIMEZONE',
       'BEGIN:VEVENT',
-      `UID:${event.id}-${dateStr}@nocotechcoalition.org`,
+      `UID:${event.id}-${dateStr}@nocotech.org`,
       `DTSTAMP:${timestamp}`,
       `DTSTART;TZID=America/Denver:${dateStr}T${startTime}`,
       `DTEND;TZID=America/Denver:${dateStr}T${endTime}`,

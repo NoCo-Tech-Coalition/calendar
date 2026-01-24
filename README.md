@@ -35,6 +35,7 @@ For questions, bug reporting or help creating events, please open an issue or em
   - Keyboard navigation (arrow keys for months, ESC to close modals)
   - Accessible (WCAG compliant with ARIA labels and semantic HTML)
   - Fast loading with no external dependencies
+  - Date range limited to 12 months in the past and 12 months in the future (rounded to full months) to optimize performance and relevance
 
 ## Quick Start
 
@@ -62,6 +63,18 @@ For questions, bug reporting or help creating events, please open an issue or em
 
 3. Open your browser to `http://localhost:8000`
 4. Edit `events.json` to add your own events and refresh the page
+
+## Date Range Limitation
+
+The calendar displays events within a **24-month window**: 12 months in the past and 12 months in the future, with both ranges rounded to include complete months.
+
+**How it works:**
+- If today is January 24, 2026, the calendar will show events from **January 1, 2025** through **January 31, 2027**
+- Navigation buttons are automatically disabled when you reach the earliest or latest viewable month
+- The event list view shows all events within this 24-month window, not just upcoming events
+- This limitation optimizes performance and ensures the calendar focuses on relevant events
+
+**Note:** Historical events older than 12 months and future events more than 12 months away will not be displayed, even if they are defined in `events.json`.
 
 ## Adding a New Community Group
 

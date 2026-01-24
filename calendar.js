@@ -9,6 +9,28 @@
   let eventsData = null;
   let currentView = 'calendar'; // 'calendar' or 'list'
 
+  // Calculate min and max allowed dates (12 months in each direction, rounded to full months)
+  function getMinAllowedDate() {
+    const now = new Date();
+    const minDate = new Date(now.getFullYear(), now.getMonth() - 12, 1);
+    minDate.setHours(0, 0, 0, 0);
+    return minDate;
+  }
+
+  function getMaxAllowedDate() {
+    const now = new Date();
+    const maxDate = new Date(now.getFullYear(), now.getMonth() + 13, 0); // Last day of month 12 months from now
+    maxDate.setHours(23, 59, 59, 999);
+    return maxDate;
+  }
+
+  // Check if a date is within the allowed range
+  function isWithinAllowedRange(date) {
+    const minDate = getMinAllowedDate();
+    const maxDate = getMaxAllowedDate();
+    return date >= minDate && date <= maxDate;
+  }
+
   // Get query parameter from URL
   function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -260,6 +282,9 @@
       const dayEl = createDayElement(day, date, true);
       calendarDays.appendChild(dayEl);
     }
+
+    // Update navigation button states
+    updateNavigationButtons();
   }
 
   // Create a day element with events
@@ -435,14 +460,59 @@
 
   // Navigate to previous month
   function prevMonth() {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar();
+    const prevMonthDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+    const minDate = getMinAllowedDate();
+
+    // Only navigate if the previous month is within the allowed range
+    if (prevMonthDate >= minDate) {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+    }
   }
 
   // Navigate to next month
   function nextMonth() {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar();
+    const nextMonthDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+    const maxDate = getMaxAllowedDate();
+
+    // Only navigate if the next month is within the allowed range
+    if (nextMonthDate <= maxDate) {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+    }
+  }
+
+  // Update navigation button states based on current month
+  function updateNavigationButtons() {
+    const prevButton = document.getElementById('prev-month');
+    const nextButton = document.getElementById('next-month');
+    const minDate = getMinAllowedDate();
+    const maxDate = getMaxAllowedDate();
+
+    const prevMonthDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+    const nextMonthDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+
+    // Disable previous button if we're at the minimum month
+    if (prevMonthDate < minDate) {
+      prevButton.disabled = true;
+      prevButton.style.opacity = '0.5';
+      prevButton.style.cursor = 'not-allowed';
+    } else {
+      prevButton.disabled = false;
+      prevButton.style.opacity = '1';
+      prevButton.style.cursor = 'pointer';
+    }
+
+    // Disable next button if we're at the maximum month
+    if (nextMonthDate > maxDate) {
+      nextButton.disabled = true;
+      nextButton.style.opacity = '0.5';
+      nextButton.style.cursor = 'not-allowed';
+    } else {
+      nextButton.disabled = false;
+      nextButton.style.opacity = '1';
+      nextButton.style.cursor = 'pointer';
+    }
   }
 
   // Render upcoming events list
@@ -452,18 +522,16 @@
 
     eventList.innerHTML = '';
 
-    // Get today's date and 12 months from now
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const endDate = new Date(today);
-    endDate.setFullYear(endDate.getFullYear() + 1); // 12 months from now
+    // Use the allowed date range (past 12 months to future 12 months)
+    const minDate = getMinAllowedDate();
+    const maxDate = getMaxAllowedDate();
 
     // Collect all events with their dates
     const upcomingEvents = [];
-    const currentDate = new Date(today);
+    const currentDate = new Date(minDate);
 
-    // Collect all events in the next 12 months
-    while (currentDate <= endDate) {
+    // Collect all events within the allowed date range
+    while (currentDate <= maxDate) {
       const events = getEventsForDate(currentDate);
       events.forEach(event => {
         const override = getOverride(event.id, formatDate(currentDate));
@@ -484,7 +552,7 @@
 
     // Render events
     if (upcomingEvents.length === 0) {
-      eventList.innerHTML = '<p style="padding: 20px; text-align: center;">No upcoming events found in the next 12 months.</p>';
+      eventList.innerHTML = '<p style="padding: 20px; text-align: center;">No events found in the viewable date range (past 12 months to future 12 months).</p>';
       return;
     }
 
